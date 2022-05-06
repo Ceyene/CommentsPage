@@ -48,7 +48,7 @@ function HomePage() {
 
 	return (
 		<div>
-			<h1>Comments Page</h1>
+			<h1>Send your Comments</h1>
 			<form onSubmit={submitFormHandler}>
 				<div className="inputContainer">
 					<label htmlFor="email">Your Email Address</label>

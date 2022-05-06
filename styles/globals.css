@@ -29,7 +29,9 @@ h6 {
 }
 
 form {
-	width: 50vw;
+	width: 80vw;
+	max-width: 650px;
+	margin: 1rem auto;
 }
 
 ul {
@@ -49,5 +51,5 @@ li {
 }
 
 a {
-	margin-left: 3rem;
+	margin-left: 10vw;
 }
