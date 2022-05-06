@@ -1,12 +1,28 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { buildFeedbackPath, extractFeedback } from '../api/feedback/index'; //won't be included in client-side code
 
 //PRE-RENDERING PAGES
 //pre-fetching feedback data so it's already there when component is rendered
 function FeedbackPage(props) {
+	//existing comments state
+	const [feedbackData, setFeedbackData] = useState();
+
+	//comments list fetching -> dynamic api routing
+	async function loadFeedbackHandler(id) {
+		try {
+			const response = await fetch(`/api/feedback/${id}`); // --> /api/some-feedback-id
+			const data = await response.json();
+
+			setFeedbackData(data.feedback);
+		} catch (error) {
+			console.log(error.message);
+		}
+	}
+
 	return (
 		<Fragment>
-			{feedbackData && <p>{feedbackData.email}</p>}
+			<h1>Comments:</h1>
+			{feedbackData && <p>Sent by: {feedbackData.email}</p>}
 			<ul>
 				{props.feedbackItems.map((item) => (
 					<li key={item.id}>
