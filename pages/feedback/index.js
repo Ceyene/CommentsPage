@@ -1,4 +1,5 @@
 import { Fragment, useState } from 'react';
+import Link from 'next/link';
 import { buildFeedbackPath, extractFeedback } from '../api/feedback/index'; //won't be included in client-side code
 
 //PRE-RENDERING PAGES
@@ -33,6 +34,7 @@ function FeedbackPage(props) {
 					</li>
 				))}
 			</ul>
+			<Link href="/">Back to Homepage</Link>
 		</Fragment>
 	);
 }

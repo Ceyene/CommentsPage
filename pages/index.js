@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import Link from 'next/link';
 
 function HomePage() {
 	//state for new comments
@@ -61,6 +62,7 @@ function HomePage() {
 			</form>
 			<hr />
 			<button onClick={loadFeedbackHandler}>Load Feedback</button>
+			<Link href="/feedback">Go to Comments page</Link>
 			<ul>
 				{feedbackItems.map((item) => (
 					<li key={item.id}>{item.text}</li>
