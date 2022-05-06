@@ -4,12 +4,12 @@ import fs from 'fs';
 import path from 'path';
 
 //building paths
-function buildFeedbackPath() {
+export function buildFeedbackPath() {
 	return path.join(process.cwd(), 'data', 'feedback.json');
 }
 
 //extracting data from request
-function extractFeedback(filePath) {
+export function extractFeedback(filePath) {
 	//read current data in the file and then update it with new data
 	const fileData = fs.readFileSync(filePath);
 	const data = JSON.parse(fileData); //parsing file data to JS object to work with it (file will have an empty array from the start)
