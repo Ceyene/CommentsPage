@@ -1,4 +1,17 @@
+import { useRef } from 'react';
+
 function HomePage() {
+	//adding references to our inputs
+	const emailInputRef = useRef();
+	const feedbackInputRef = useRef();
+
+	//form handler
+	function submitFormHandler(event) {
+		event.preventDefault();
+		const enteredEmail = emailInputRef.current.value;
+		const enteredFeedback = feedbackInputRef.current.value;
+	}
+
 	return (
 		<div>
 			<h1>Comments Page</h1>
