@@ -1,11 +1,14 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 function HomePage() {
+	//state for new comments
+	const [feedbackItems, setFeedbackItems] = useState([]);
+
 	//adding references to our inputs
 	const emailInputRef = useRef();
 	const feedbackInputRef = useRef();
 
-	//form handler
+	//form submit handler (POST Request)
 	async function submitFormHandler(event) {
 		event.preventDefault();
 		const enteredEmail = emailInputRef.current.value;
@@ -16,7 +19,7 @@ function HomePage() {
 		try {
 			//sending POST request
 			// using absolute path -> text will be appended right after our domain
-			const response = await fetch('/api/test', {
+			const response = await fetch('/api/feedback', {
 				method: 'POST',
 				body: JSON.stringify(reqBody),
 				headers: {
@@ -26,7 +29,19 @@ function HomePage() {
 			const data = await response.json();
 			console.log(data);
 		} catch (error) {
-			console.log(error);
+			console.log(error.message);
+		}
+	}
+
+	//showing current comments (GET Request)
+	async function loadFeedbackHandler() {
+		try {
+			const response = await fetch('/api/feedback');
+			const data = await response.json();
+
+			setFeedbackItems(data.feedback);
+		} catch (error) {
+			console.log(error.message);
 		}
 	}
 
@@ -45,8 +60,12 @@ function HomePage() {
 				<button>Send Feedback</button>
 			</form>
 			<hr />
-			<button>Load Feedback</button>
-			<ul></ul>
+			<button onClick={loadFeedbackHandler}>Load Feedback</button>
+			<ul>
+				{feedbackItems.map((item) => (
+					<li key={item.id}>{item.text}</li>
+				))}
+			</ul>
 		</div>
 	);
 }
